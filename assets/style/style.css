@@ -1,0 +1,170 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    overflow-wrap: anywhere;
+}
+
+div{
+    display: flex;
+    flex-direction: column;
+}
+
+
+ol, ul {
+    list-style: none;
+}
+
+li{
+    margin-block: 10px;
+    padding-inline: 10px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+body {
+    background-color: #252525;
+    font-family: 'JetBrains Mono', monospace;
+    color: #c1c1c1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+#text-block-input{
+    height:4em;
+    width:90%;
+}
+
+#text-search-input{
+    width:90%;
+}
+
+button{
+    padding:10px;
+    width: 90%;
+}
+
+#search-results{
+    display: flex;
+    justify-content: center;
+}
+
+.search-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding:10px
+}
+
+.chunk{
+    display: flex;
+    align-items: center;
+}
+
+#answer-chunk{
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 1.2em;
+}
+
+.title{
+    text-align: center;
+}
+
+.text-inputs{
+    border: 1px solid;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-block:15px;
+}
+
+.input-block{
+    display: flex;
+    margin-block: 5px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:90%
+}
+
+.algo-description{
+    border: 1px solid;
+    margin-block: 10px;
+    width: 100%;
+    padding: 10px;
+    display: block;
+}
+
+smaller{
+    text-align: center;
+}
+
+.results-container{
+    border:1px solid;
+    margin-block: 15px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding:10px;
+}
+
+a{
+    color: unset;
+    margin-block: 10px;
+}
+
+.loop-box{
+    border: 1px dashed;
+    padding: 10px;
+    margin: 10px;
+}
+
+.indent{
+    padding-left: 30px;
+    padding-block: 10px;
+}
+
+.conditional{
+    font-weight: bold;
+}
+
+.algo-examples{
+    border: 1px solid;
+    padding: 25px;
+    margin-block: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (min-width: 600px){
+    .container{
+        max-width: 600px;
+    }
+}

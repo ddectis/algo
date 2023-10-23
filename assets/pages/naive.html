@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../style/style.css?3" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Naive Search</title>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="title">
+            <h2>A JavaScript Implementation of the Naive Algorithm for Pattern Searching</h2>
+            
+        </div>
+    
+        <div>
+            <div class="text-inputs">
+                <div class="input-block">
+                    <label for="text-block-input">Text block to search:</label>
+                    <textarea type="text" id="text-block-input" name="text-block-input" placeholder="BNAAANBANABABANBANANANABANBBNAAANBANANBNAAANBANB"></textarea>
+                </div>
+                <div class="input-block">
+                    <label for="text-search-input">Text to search for:</label>
+                    <input type="text" id="text-search-input" name="text-search-input" placeholder="BANANA">
+                </div>
+                <button id="search-button">Search</button>
+                <div>
+                    <label for="case-sensitive">Case Sensitive</label>
+                    <input type="checkbox" id="case-sensitive" name="case-sensitive">
+                </div>
+                <br/>
+                <smaller>An example text block and search key have been provided</smaller>
+            </div>
+            <div class="results-container">
+                
+                <div class="search-details">
+                    <div class="chunk" id="first-chunk"></div>
+                    <div class="chunk" id="answer-chunk"></div>
+                    <div class="chunk" id="last-chunk"></div>
+                </div>
+                <div id="search-results">
+                
+                </div>
+            </div>
+        </div>
+            <a href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+        
+            <div class="algo-description">
+                <h2>Naive Pattern Search Algorithm</h2>
+                <div class="loop-box">
+                    <h3><u>Outer Loop - M</u></h3>
+                    <li>Iterate over each character </li>
+                    <li>Set the match counter to 0</li>
+                        <div class="loop-box">
+                            <h3><u>Inner Loop - N</u></h3>
+                            <li>Check the Nth character of the search pattern against the N + Mth character of the block to search</li>
+                            <div class="indent">
+                                <p class="conditional">IF TRUE</p>
+                                <div class="loop-box">
+                                    <li class="indent">Iterate the match counter </li>
+                                </div>                            
+                                <p class="conditional">IF FALSE</p>
+                                <div class="loop-box">
+                                    <li class="indent">Break out of the inner loop</li>
+                                </div>
+                            </div>
+                        </div>
+                    <li>Check if the match counter matches the length of the search pattern</li>
+                    <div class="indent">
+                        <p class="conditional">IF TRUE</p>
+                        <div class="loop-box">
+                            <li class="indent">The match has been found and will be printed</li>
+                        </div>
+                        <p class="conditional">ELSE</p>
+                        <div class="loop-box">
+                            <li class="indent">Check the next character of the search block</li>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <a href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+        </div>
+    </div>
+    
+
+    <script type="module" src="../scripts/naive.js"></script>
+</body>
+</html>
