@@ -164,8 +164,13 @@ a{
 }
 
 .code-block{
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     padding:15px;
+}
+
+pre{
+    tab-size: 4;
+    overflow-x: hidden;
 }
 
 @media screen and (min-width: 600px){
