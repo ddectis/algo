@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../style/style.css?3" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Merge Sort</title>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="title">
+            <h2>A JavaScript implementation of the Merge Sort Algorithm</h2>
+            
+        </div>
+    
+        <div>
+            <div class="text-inputs">
+                <div class="input-block">
+                    <label for="numbers-input">Provide a comma separated list of numbers to sort from low to high:</label>
+                    <textarea type="text" id="numbers-input" name="numbers-input" placeholder="25,5,10,3,1,2"></textarea>
+                </div>
+                <button id="execute-button">Execute</button>
+                <br/>
+                <smaller>An example number list has been provided</smaller>
+            </div>
+            <div class="results-container" id="results">
+                
+            </div>
+        </div>
+            <a href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+        
+            <div class="code-block">
+                <h2>Optimized Bubble Sort Algorithm</h2>
+                <div class="loop-box">
+                    <h3><u>Outer Loop: M</u></h3>
+                    <li>Iterate over each value in the array of numbers </li>
+                        <div class="loop-box">
+                            <h3><u>Inner Loop: N</u></h3>
+                            <li>Compare array index N to see if it is greater than array index N + 1</li>
+                            <li>The first iteration will check the full length of the array - 1</li>
+                            <div class="indent">
+                                <p class="conditional">IF TRUE</p>
+                                <div class="loop-box">
+                                    <li class="indent">Swap the values at index N and N+1</li>
+                                </div>                            
+                                <li>Because we swap indices when the lower index has the higher value, the highest value is moved to the last index at the end of the first iteration. Therefore, on each subsequent iteration, we decrease the length of the inner loop by one, since we know that on each loop, we're adding a correctly placed value to the end of the array.</li>
+                            </div>
+                        </div>
+                    
+                    
+                    
+                </div>
+            </div>
+
+            <a href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+        </div>
+    </div>
+    
+
+    <script type="module" src="../scripts/merge.js"></script>
+</body>
+</html>

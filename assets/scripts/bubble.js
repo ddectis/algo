@@ -21,15 +21,18 @@ const bubbleSort = (arr) => {
             }
         }
     }
+    
+    printResults(arr);    
 
+}
+
+const printResults = arr =>{
     console.log("Sorted Array: " + arr)
     if (arr.length > 0){
         resultsContainer.innerText = "Sorted Number List: " + arr
     } else {
         resultsContainer.innerText = "No numbers were detected. Did you enter a comma separated list of numbers?"
     }
-    
-
 }
 
 executeButton.addEventListener("click",function (){

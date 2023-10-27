@@ -58,6 +58,10 @@ const pattern_search = (text, pattern, caseSensitive) =>{
     
 }
 
+const printResults = (text, index) =>{
+    
+}
+
 searchButton.addEventListener("click", function() {
     searchResultsHolder.innerText = "";
     let text = textBlockInput.value;
