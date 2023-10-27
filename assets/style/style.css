@@ -15,6 +15,7 @@ body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     padding: 0;
     font-weight: normal;
     overflow-wrap: anywhere;
+    
 }
 
 div{
@@ -60,7 +61,9 @@ body {
 
 button{
     padding:10px;
-    width: 90%;
+    width: 70%;
+    border-radius: 5px;
+    font-size: 1.5em;
 }
 
 #search-results{
@@ -97,21 +100,24 @@ button{
     flex-direction: column;
     align-items: center;
     margin-block:15px;
+    border-radius: 5px;
 }
 
 .input-block{
     display: flex;
-    margin-block: 5px;
+    margin-block: 20px;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding:10px
 }
 
 .container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:90%
+    width:90%;
+    border-radius: 5px;
 }
 
 .algo-description{
@@ -120,6 +126,7 @@ button{
     width: 100%;
     padding: 10px;
     display: block;
+    border-radius: 5px;
 }
 
 smaller{
@@ -133,6 +140,7 @@ smaller{
     align-items: center;
     text-align: center;
     padding:10px;
+    border-radius: 5px;
 }
 
 a{
@@ -166,11 +174,15 @@ a{
 .code-block{
     background-color: rgb(0, 0, 0);
     padding:15px;
+    margin-block: 20px;
+    width: 100%;
 }
 
-pre{
-    tab-size: 4;
-    overflow-x: hidden;
+.go-back-link{
+    color: #252525;
+    background-color: #c1c1c1;
+    padding:10px;
+    border-radius: 5px;
 }
 
 @media screen and (min-width: 600px){

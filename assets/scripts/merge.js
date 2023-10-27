@@ -1,3 +1,12 @@
+//USAGE: Call the mergeSort function with an array of numbers. This implementation is set up to allow users to input a list of numbers as a usage example and then output the results to the page.
+//I also left a lot of console logs in here because it helped me better understand how this algorithm works.
+
+//create references to the pieces on the page that we'll need in order to grab the number list input and then put the result back on the page
+const resultsContainer = document.getElementById('results')
+const executeButton = document.getElementById('execute-button');
+const numberInput = document.getElementById('numbers-input')
+
+
 const merge = (left, right) =>{
     let result = [];
     console.log("merge called L: " + left + " R: " + right)
@@ -49,8 +58,31 @@ const mergeSort = items =>{
     
 }
 
-let list = [356, 746, 264, 569, 949, 895, 125, 455]
-//let list = [5,100,55,2]
-let result = mergeSort(list)
+const clearResults = () =>{
+    resultsContainer.innerText = ''
+}
 
-console.log(result)
+const printResult = results =>{
+    if (results.length > 0){
+        resultsContainer.innerText = "Sorted List: " + results
+    } else {
+        resultsContainer.innerText = "No numbers were detected. Did you enter a comma separated list of numbers?"
+    }
+}
+
+//attach an event listener to the execute button which will handle the logic of taking the user input, sorting it, and printing the result
+executeButton.addEventListener("click",function() {
+    clearResults(); //to begin with, ensure that the result container is empty. Otherwise if the user does 2+ executions without reloading the page, the old results will still be printed.
+    let inputValue = numberInput.value;     //grab the value input in the text box provided
+    if (!inputValue){                       // check to see if a value was indeed entered, if not, use the placeholder
+        inputValue = '356, 746, 264, 569, 949, 895, 125, 455'
+    }
+    //map the comma separated list provided into an array and then filter out any NaN values
+    const filteredArray = inputValue.split(',').map(Number).filter(num => !isNaN(num))
+    let result = mergeSort(filteredArray) //sort the values
+    printResult(result) // print them
+    console.log(result) // I decided to leave all of the console logs in this script as it helped me understaned the flow of this algorithm
+})
+
+
+
