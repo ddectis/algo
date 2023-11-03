@@ -48,62 +48,96 @@
             <div class="code-block">
                 <h2>Merge Sort Algorithm Code Example</h2>
                 <div>
-<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);">const merge = (left, right) =&gt;{
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> result = [];
-    console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"merge called L: "</span> + left + <span class="hljs-string" style="color: rgb(162, 252, 162);">" R: "</span> + right)
-    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">while</span> (left.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">length</span> &amp;&amp; right.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">length</span>){
-        //console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"left and right have items"</span>)
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-comment" style="color: rgb(136, 136, 136);">//USAGE: Call the mergeSort function with an array of numbers. This implementation is set up to allow users to input a list of </span>
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//numbers as a usage example and then output the results to the page.</span>
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//I also left a lot of console logs in here because it helped me better understand how this algorithm works.</span>
+
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//create references to the pieces on the page that we'll need in order to grab the number list input and then put the result back on the page</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> resultsContainer = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'results'</span>)
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> executeButton = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'execute-button'</span>);
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> numberInput = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'numbers-input'</span>)
+
+
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> merge = (left, right) =&gt;{
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> result = [];
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"merge called L: "</span> + left + <span class="hljs-string" style="color: rgb(162, 252, 162);">" R: "</span> + right)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">while</span> (left.length &amp;&amp; right.length){
+        <span class="hljs-comment" style="color: rgb(136, 136, 136);">//console.log("left and right have items")</span>
         <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (left[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>] &lt; right[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>]){
-            console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"adding left: "</span> + left[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
-            result.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">push</span>(left.shift())
-            console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"result: "</span> + result)
+            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"adding left: "</span> + left[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
+            result.push(left.shift())
+            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"result: "</span> + result)
         } <span class="hljs-keyword" style="color: rgb(252, 194, 140);">else</span> {
-            console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"adding right: "</span> + right[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
-            result.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">push</span>(right.shift())
-            console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"result: "</span> + result)
+            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"adding right: "</span> + right[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
+            result.push(right.shift())
+            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"result: "</span> + result)
         }
     }
 
-    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (left.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">length</span>){
-        console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Left still has items "</span> + left)
-        result.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">push</span>(left[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
-        console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"New Result: "</span> + result)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (left.length){
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Left still has items "</span> + left)
+        result.push(left[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"New Result: "</span> + result)
         left.shift()
     }
-    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (right.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">length</span>){
-        console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Right still has items "</span> + right)
-        result.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">push</span>(right[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
-        console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"New Result: "</span> + result)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (right.length){
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Right still has items "</span> + right)
+        result.push(right[<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>])
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"New Result: "</span> + result)
         right.shift()
     }
 
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">return</span> result
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">return</span> result
 }
 
-const mergeSort = items =&gt;{
-    console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Merge Sort Called "</span> + items)
-    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (items.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">length</span> &lt;= <span class="hljs-number" style="color: rgb(211, 99, 99);">1</span>){
-        console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Down to one item: "</span> + items)
-        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">return</span> items
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> mergeSort = items =&gt;{
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Merge Sort Called "</span> + items)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (items.length &lt;= <span class="hljs-number" style="color: rgb(211, 99, 99);">1</span>){
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Down to one item: "</span> + items)
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">return</span> items
     }
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> middleIndex = items.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">length</span> / <span class="hljs-number" style="color: rgb(211, 99, 99);">2</span>
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> leftSplit = items.slice(<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>,middleIndex)
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> rightSplit = items.slice(middleIndex)
-    console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Left Split: "</span> + leftSplit)
-    console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Right Split: "</span> + rightSplit)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> middleIndex = items.length / <span class="hljs-number" style="color: rgb(211, 99, 99);">2</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> leftSplit = items.slice(<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>,middleIndex)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> rightSplit = items.slice(middleIndex)
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Left Split: "</span> + leftSplit)
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Right Split: "</span> + rightSplit)
 
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> leftSorted = mergeSort(leftSplit)
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> rightSorted = mergeSort(rightSplit)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> leftSorted = mergeSort(leftSplit)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> rightSorted = mergeSort(rightSplit)
 
-    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">return</span> merge(leftSorted, rightSorted)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">return</span> merge(leftSorted, rightSorted)
     
 }
 
-<span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> list = [<span class="hljs-number" style="color: rgb(211, 99, 99);">356</span>, <span class="hljs-number" style="color: rgb(211, 99, 99);">746</span>, <span class="hljs-number" style="color: rgb(211, 99, 99);">264</span>, <span class="hljs-number" style="color: rgb(211, 99, 99);">569</span>, <span class="hljs-number" style="color: rgb(211, 99, 99);">949</span>, <span class="hljs-number" style="color: rgb(211, 99, 99);">895</span>, <span class="hljs-number" style="color: rgb(211, 99, 99);">125</span>, <span class="hljs-number" style="color: rgb(211, 99, 99);">455</span>]
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> clearResults = () =&gt;{
+    resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">''</span>
+}
 
-<span class="hljs-built_in" style="color: rgb(255, 255, 170);">let</span> result = mergeSort(list)
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> printResult = results =&gt;{
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (results.length &gt; <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>){
+        resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">"Sorted List: "</span> + results
+    } <span class="hljs-keyword" style="color: rgb(252, 194, 140);">else</span> {
+        resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">"No numbers were detected. Did you enter a comma separated list of numbers?"</span>
+    }
+}
 
-console.<span class="hljs-built_in" style="color: rgb(255, 255, 170);">log</span>(result)</pre>
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//attach an event listener to the execute button which will handle the logic of taking the user input, sorting it, and printing the result</span>
+executeButton.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"click"</span>,<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span>(<span class="hljs-params"></span>) </span>{
+    clearResults(); <span class="hljs-comment" style="color: rgb(136, 136, 136);">//to begin with, ensure that the result container is empty. Otherwise if the user does 2+ executions without reloading the page, the old results will still be printed.</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> inputValue = numberInput.value;     <span class="hljs-comment" style="color: rgb(136, 136, 136);">//grab the value input in the text box provided</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!inputValue){                       <span class="hljs-comment" style="color: rgb(136, 136, 136);">// check to see if a value was indeed entered, if not, use the placeholder</span>
+        inputValue = <span class="hljs-string" style="color: rgb(162, 252, 162);">'356, 746, 264, 569, 949, 895, 125, 455'</span>
+    }
+    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//map the comma separated list provided into an array and then filter out any NaN values</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> filteredArray = inputValue.split(<span class="hljs-string" style="color: rgb(162, 252, 162);">','</span>).map(<span class="hljs-built_in" style="color: rgb(255, 255, 170);">Number</span>).filter(num =&gt; !<span class="hljs-built_in" style="color: rgb(255, 255, 170);">isNaN</span>(num))
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> result = mergeSort(filteredArray) <span class="hljs-comment" style="color: rgb(136, 136, 136);">//sort the values</span>
+    printResult(result) <span class="hljs-comment" style="color: rgb(136, 136, 136);">// print them</span>
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(result) <span class="hljs-comment" style="color: rgb(136, 136, 136);">// I decided to leave all of the console logs in this script as it helped me understaned the flow of this algorithm</span>
+})
+
+
+
+</pre>
                 </div>
             </div>
 

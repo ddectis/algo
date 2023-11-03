@@ -187,6 +187,6 @@ a{
 
 @media screen and (min-width: 600px){
     .container{
-        max-width: 600px;
+        max-width: 95%;
     }
 }

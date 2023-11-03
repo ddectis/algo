@@ -39,13 +39,13 @@ const printResults = arr =>{
 }
 
 executeButton.addEventListener("click",function (){
-    let inputValue = numberInput.value;
-    if (!inputValue){
+    let inputValue = numberInput.value; //map the user input to a variable
+    if (!inputValue){ //apply a default placeholder if the user didn't enter anything
         inputValue = '25,5,10,3,1,2';
     }
     
-    const inputArray = inputValue.split(",").map(Number)
-    const filteredArray = inputArray.filter(num => !isNaN(num))
+    const inputArray = inputValue.split(",").map(Number) //split the input values by comma into an array
+    const filteredArray = inputArray.filter(num => !isNaN(num)) //filter out any of the non-numerical values
     console.log("Input Array: " + filteredArray)
     let results = bubbleSort(filteredArray);
     printResults(results);

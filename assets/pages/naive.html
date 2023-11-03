@@ -47,9 +47,88 @@
             </div>
         </div>
             <a class="go-back-link" href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+        <div class="code-block">
+            <h2>Algorithm Code Example</h2>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-comment" style="color: rgb(136, 136, 136);">//create references to the places on the page that we will make use of later in the script</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> textBlockInput = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"text-block-input"</span>); 
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> searchTextInput = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"text-search-input"</span>);
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> searchResultsHolder = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"search-results"</span>);
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> caseSensitive = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"case-sensitive"</span>); <span class="hljs-comment" style="color: rgb(136, 136, 136);">//a toggle to determine if the search should be case sensitive</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> searchButton = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"search-button"</span>);
+
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//this function expects a text block to search, a pattern to look for, and a boolean to determine if the search is case sensitive</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> patternSearch = (text, pattern, caseSensitive) =&gt;{
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Input Text: "</span> + text + <span class="hljs-string" style="color: rgb(162, 252, 162);">" Input Pattern: "</span> + pattern);
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> matchFound = <span class="hljs-literal" style="color: rgb(252, 194, 140);">false</span>;
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> results = <span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>;
+    
+    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//the user has the option for the search to be case sensitive or not. If it is not case sensitive, we cast the search pattern and the search block to lower case</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!caseSensitive){
+        text = text.toLowerCase();
+        pattern = pattern.toLowerCase();
+    }
+
+    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//look through each character in the provided search block</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> (<span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> i = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>; i &lt; text.length; i++){
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Text Index: "</span> + i);
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> matchCount = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span> 
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> (<span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> char = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>; char &lt; pattern.length; char++){ <span class="hljs-comment" style="color: rgb(136, 136, 136);">//for each character in the provided search block, check it against the pattern, if there is a match, check subsequent letters of the pattern.</span>
+            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Pattern Index: "</span> + char)
+            <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (pattern[char] === text[i + char]){
+                <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"match found"</span>);
+                matchCount++
+            } <span class="hljs-keyword" style="color: rgb(252, 194, 140);">else</span> {
+                <span class="hljs-keyword" style="color: rgb(252, 194, 140);">break</span>
+            }
+        }
+        <span class="hljs-comment" style="color: rgb(136, 136, 136);">//at this point, the inner loop has either matched sufficient characters to have found the pattern, or it has not. So we check</span>
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (matchCount === pattern.length){
+            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(pattern + <span class="hljs-string" style="color: rgb(162, 252, 162);">" found at index "</span> + i)
+            results += <span class="hljs-string" style="color: rgb(162, 252, 162);">"Found "</span> + pattern + <span class="hljs-string" style="color: rgb(162, 252, 162);">" at character "</span> + i + <span class="hljs-string" style="color: rgb(162, 252, 162);">". "</span>
+            matchFound = <span class="hljs-literal" style="color: rgb(252, 194, 140);">true</span>;
+        }
+    }
+    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//by this point, we've checked every character of the search block, so we need to indicate if we've not yet found a match</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!matchFound){
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.error(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Text searched. Match not found."</span>)
+        results = <span class="hljs-string" style="color: rgb(162, 252, 162);">"Text searched. Match not found."</span>
+    }
+
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">return</span> results;
+
+}
+
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> printResults = (results) =&gt;{
+    searchResultsHolder.innerText = results
+}
+
+searchButton.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"click"</span>, <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span>(<span class="hljs-params"></span>) </span>{
+    searchResultsHolder.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>;
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> text = textBlockInput.value;
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> pattern = searchTextInput.value
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(textBlockInput.value)
+    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//place the placeholder values into variables for use if the user has not entered anything</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!textBlockInput.value){
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"nothing entered"</span>)
+        text = <span class="hljs-string" style="color: rgb(162, 252, 162);">"BNAAANBANABABANBANANANABANBBNAAANBANANBNAAANBANB"</span>
         
+    }
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!searchTextInput.value){
+        pattern = <span class="hljs-string" style="color: rgb(162, 252, 162);">"BANANA"</span>
+    }
+    
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> searchResults = patternSearch(text, pattern, caseSensitive.checked);
+    printResults(searchResults);
+
+})
+
+
+
+</pre>
+        </div>
+
             <div class="algo-description">
-                <h2>Naive Pattern Search Algorithm</h2>
+                <h2>Naive Pattern Search Overview</h2>
                 <div class="loop-box">
                     <h3><u>Outer Loop - M</u></h3>
                     <li>Iterate over each character </li>
@@ -84,90 +163,7 @@
             </div>
 
             <div>
-                <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-comment" style="color: rgb(136, 136, 136);">//create references to the places on the page that we will make use of later in the script</span>
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> textBlockInput = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"text-block-input"</span>);
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> searchTextInput = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"text-search-input"</span>);
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> searchResultsHolder = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"search-results"</span>);
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> caseSensitive = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"case-sensitive"</span>);
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> searchButton = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">"search-button"</span>);
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> firstChunkHolder = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'first-chunk'</span>);
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> answerHolder = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'answer-chunk'</span>)
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> lastChunkHolder = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'last-chunk'</span>)
-                    
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> pattern_search = (text, pattern, caseSensitive) =&gt;{
-                        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Input Text: "</span> + text + <span class="hljs-string" style="color: rgb(162, 252, 162);">" Input Pattern: "</span> + pattern);
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> matchFound = <span class="hljs-literal" style="color: rgb(252, 194, 140);">false</span>;
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> results = <span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>;
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> firstChunk = <span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>;
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> answerChunk = <span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>;
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> lastChunk = <span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>;
-                        
-                        
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!caseSensitive){
-                            text = text.toLowerCase();
-                            pattern = pattern.toLowerCase();
-                        }
-                    
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> (<span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> i = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>; i &lt; text.length; i++){
-                            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Text Index: "</span> + i);
-                            <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> matchCount = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span> 
-                            <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> (<span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> char = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>; char &lt; pattern.length; char++){
-                                <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Pattern Index: "</span> + char)
-                                <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (pattern[char] === text[i + char]){
-                                    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"match found"</span>);
-                                    matchCount++
-                                } <span class="hljs-keyword" style="color: rgb(252, 194, 140);">else</span> {
-                                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">break</span>
-                                }
-                            }
-                            <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (matchCount === pattern.length){
-                                <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(pattern + <span class="hljs-string" style="color: rgb(162, 252, 162);">" found at index "</span> + i)
-                                results += <span class="hljs-string" style="color: rgb(162, 252, 162);">"Found "</span> + pattern + <span class="hljs-string" style="color: rgb(162, 252, 162);">" at character "</span> + i + <span class="hljs-string" style="color: rgb(162, 252, 162);">". "</span>
-                                                                                    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//split the input string into 3 chunks</span>
-                                firstChunk = text.substring(<span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>,i)                    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//this is the string chunk prior to the index that begins the answer</span>
-                                answerChunk = text.substring(i, i + pattern.length) <span class="hljs-comment" style="color: rgb(136, 136, 136);">//this is the found answer</span>
-                                lastChunk = text.substring(i + pattern.length)      <span class="hljs-comment" style="color: rgb(136, 136, 136);">//this is the remaining portion of the search block</span>
-                                matchFound = <span class="hljs-literal" style="color: rgb(252, 194, 140);">true</span>;
-                                
-                            }
-                        }
-                    
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!matchFound){
-                            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.error(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Text searched. Match not found."</span>)
-                            results = <span class="hljs-string" style="color: rgb(162, 252, 162);">"Text searched. Match not found."</span>
-                        }
-                    
-                        searchResultsHolder.innerText = results
-                        firstChunkHolder.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">"Searched: "</span> + firstChunk;
-                        answerHolder.innerText = answerChunk;
-                        lastChunkHolder.innerText = lastChunk;
-                        
-                    }
-                    
-                    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> printResults = (text, index) =&gt;{
-                        
-                    }
-                    
-                    searchButton.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"click"</span>, <span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span>(<span class="hljs-params"></span>) </span>{
-                        searchResultsHolder.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">""</span>;
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> text = textBlockInput.value;
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> pattern = searchTextInput.value
-                        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(textBlockInput.value)
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!textBlockInput.value){
-                            <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"nothing entered"</span>)
-                            text = <span class="hljs-string" style="color: rgb(162, 252, 162);">"BNAAANBANABABANBANANANABANBBNAAANBANANBNAAANBANB"</span>
-                            
-                        }
-                        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!searchTextInput.value){
-                            pattern = <span class="hljs-string" style="color: rgb(162, 252, 162);">"BANANA"</span>
-                        }
-                        
-                        pattern_search(text, pattern, caseSensitive.checked);
-                    })
-                    
-                    
-                    
-                    </pre>
+
             </div>
 
             <a class="go-back-link" href="../../index.html"><< Go Back To Algorithm Sandbox</a>

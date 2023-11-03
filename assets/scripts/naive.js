@@ -1,31 +1,27 @@
 //create references to the places on the page that we will make use of later in the script
-const textBlockInput = document.getElementById("text-block-input");
+const textBlockInput = document.getElementById("text-block-input"); 
 const searchTextInput = document.getElementById("text-search-input");
 const searchResultsHolder = document.getElementById("search-results");
-const caseSensitive = document.getElementById("case-sensitive");
+const caseSensitive = document.getElementById("case-sensitive"); //a toggle to determine if the search should be case sensitive
 const searchButton = document.getElementById("search-button");
-const firstChunkHolder = document.getElementById('first-chunk');
-const answerHolder = document.getElementById('answer-chunk')
-const lastChunkHolder = document.getElementById('last-chunk')
 
-const pattern_search = (text, pattern, caseSensitive) =>{
+//this function expects a text block to search, a pattern to look for, and a boolean to determine if the search is case sensitive
+const patternSearch = (text, pattern, caseSensitive) =>{
     console.log("Input Text: " + text + " Input Pattern: " + pattern);
     let matchFound = false;
     let results = "";
-    let firstChunk = "";
-    let answerChunk = "";
-    let lastChunk = "";
     
-    
+    //the user has the option for the search to be case sensitive or not. If it is not case sensitive, we cast the search pattern and the search block to lower case
     if (!caseSensitive){
         text = text.toLowerCase();
         pattern = pattern.toLowerCase();
     }
 
+    //look through each character in the provided search block
     for (let i = 0; i < text.length; i++){
         console.log("Text Index: " + i);
         let matchCount = 0 
-        for (let char = 0; char < pattern.length; char++){
+        for (let char = 0; char < pattern.length; char++){ //for each character in the provided search block, check it against the pattern, if there is a match, check subsequent letters of the pattern.
             console.log("Pattern Index: " + char)
             if (pattern[char] === text[i + char]){
                 console.log("match found");
@@ -34,32 +30,25 @@ const pattern_search = (text, pattern, caseSensitive) =>{
                 break
             }
         }
+        //at this point, the inner loop has either matched sufficient characters to have found the pattern, or it has not. So we check
         if (matchCount === pattern.length){
             console.log(pattern + " found at index " + i)
             results += "Found " + pattern + " at character " + i + ". "
-                                                                //split the input string into 3 chunks
-            firstChunk = text.substring(0,i)                    //this is the string chunk prior to the index that begins the answer
-            answerChunk = text.substring(i, i + pattern.length) //this is the found answer
-            lastChunk = text.substring(i + pattern.length)      //this is the remaining portion of the search block
             matchFound = true;
-            
         }
     }
-
+    //by this point, we've checked every character of the search block, so we need to indicate if we've not yet found a match
     if (!matchFound){
         console.error("Text searched. Match not found.")
         results = "Text searched. Match not found."
     }
 
-    searchResultsHolder.innerText = results
-    firstChunkHolder.innerText = "Searched: " + firstChunk;
-    answerHolder.innerText = answerChunk;
-    lastChunkHolder.innerText = lastChunk;
-    
+    return results;
+
 }
 
-const printResults = (text, index) =>{
-    
+const printResults = (results) =>{
+    searchResultsHolder.innerText = results
 }
 
 searchButton.addEventListener("click", function() {
@@ -67,6 +56,7 @@ searchButton.addEventListener("click", function() {
     let text = textBlockInput.value;
     let pattern = searchTextInput.value
     console.log(textBlockInput.value)
+    //place the placeholder values into variables for use if the user has not entered anything
     if (!textBlockInput.value){
         console.log("nothing entered")
         text = "BNAAANBANABABANBANANANABANBBNAAANBANANBNAAANBANB"
@@ -76,7 +66,9 @@ searchButton.addEventListener("click", function() {
         pattern = "BANANA"
     }
     
-    pattern_search(text, pattern, caseSensitive.checked);
+    const searchResults = patternSearch(text, pattern, caseSensitive.checked);
+    printResults(searchResults);
+
 })
 
 

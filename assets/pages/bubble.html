@@ -31,9 +31,68 @@
             </div>
         </div>
             <a class="go-back-link" href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+
+<div class="code-block">
+    <h2>Bubble Sort Algorithm Code Example</h2>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-comment" style="color: rgb(136, 136, 136);">//create references to the parts of the page we'll need to make use of later</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> numberInput = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'numbers-input'</span>)
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> executeButton = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'execute-button'</span>)
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> resultsContainer = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'results'</span>)
+
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//USAGE: you'll need both bubbleSort() and swap() in order for this algorithm </span>
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//to work. If you have both in your script, simply call bubbleSort() and pass it </span>
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//an array. It will return a sorted array.</span>
+
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//function to handle the swapping of values from index1 to index2</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> swap = (arr, index1, index2) =&gt; {
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> temp = arr[index1]
+    arr[index1] = arr[index2]
+    arr[index2] = temp
+}
+
+<span class="hljs-comment" style="color: rgb(136, 136, 136);">//main sorting function, makes use of "swap()"</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> bubbleSort = (arr) =&gt; {
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> (<span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> i = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>; i &lt; arr.length; i++){ <span class="hljs-comment" style="color: rgb(136, 136, 136);">//iterate over every value in the array</span>
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> (<span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> index = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>; index &lt; arr.length - i - <span class="hljs-number" style="color: rgb(211, 99, 99);">1</span>; index++){ 
+            <span class="hljs-comment" style="color: rgb(136, 136, 136);">//In the inner loop, we subrtract i from the inner loop because by the time </span>
+            <span class="hljs-comment" style="color: rgb(136, 136, 136);">//the loop gets to the last item in the array, it will definitely be in its </span>
+            <span class="hljs-comment" style="color: rgb(136, 136, 136);">//correct position. Therefore, on the next pass through, we can omit that index value</span>
+            <span class="hljs-comment" style="color: rgb(136, 136, 136);">//this has the effect of drastically reducing the number of iterations required</span>
+            <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (arr[index] &gt; arr[index + <span class="hljs-number" style="color: rgb(211, 99, 99);">1</span>]){
+                swap(arr, index, index + <span class="hljs-number" style="color: rgb(211, 99, 99);">1</span>)
+            }
+        }
+    }
+    
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">return</span>(arr);    
+}
+
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> printResults = arr =&gt;{
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Sorted Array: "</span> + arr)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (arr.length &gt; <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>){
+        resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">"Sorted Number List: "</span> + arr
+    } <span class="hljs-keyword" style="color: rgb(252, 194, 140);">else</span> {
+        resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">"No numbers were detected. Did you enter a comma separated list of numbers?"</span>
+    }
+}
+
+executeButton.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"click"</span>,<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span> (<span class="hljs-params"></span>)</span>{
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> inputValue = numberInput.value; <span class="hljs-comment" style="color: rgb(136, 136, 136);">//map the user input to a variable</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!inputValue){ <span class="hljs-comment" style="color: rgb(136, 136, 136);">//apply a default placeholder if the user didn't enter anything</span>
+        inputValue = <span class="hljs-string" style="color: rgb(162, 252, 162);">'25,5,10,3,1,2'</span>;
+    }
+    
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> inputArray = inputValue.split(<span class="hljs-string" style="color: rgb(162, 252, 162);">","</span>).map(<span class="hljs-built_in" style="color: rgb(255, 255, 170);">Number</span>) <span class="hljs-comment" style="color: rgb(136, 136, 136);">//split the input values by comma into an array</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> filteredArray = inputArray.filter(num =&gt; !<span class="hljs-built_in" style="color: rgb(255, 255, 170);">isNaN</span>(num)) <span class="hljs-comment" style="color: rgb(136, 136, 136);">//filter out any of the non-numerical values</span>
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(<span class="hljs-string" style="color: rgb(162, 252, 162);">"Input Array: "</span> + filteredArray)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> results = bubbleSort(filteredArray);
+    printResults(results);
+})
+</pre>
+</div>
         
             <div class="algo-description">
-                <h2>Optimized Bubble Sort Algorithm</h2>
+                <h2>Optimized Bubble Sort Overview</h2>
                 <div class="loop-box">
                     <h3><u>Outer Loop: M</u></h3>
                     <li>Iterate over each value in the array of numbers </li>

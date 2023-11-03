@@ -1,4 +1,5 @@
-//USAGE: Call the mergeSort function with an array of numbers. This implementation is set up to allow users to input a list of numbers as a usage example and then output the results to the page.
+//USAGE: Call the mergeSort function with an array of numbers. This implementation is set up to allow users to input a list of 
+//numbers as a usage example and then output the results to the page.
 //I also left a lot of console logs in here because it helped me better understand how this algorithm works.
 
 //create references to the pieces on the page that we'll need in order to grab the number list input and then put the result back on the page
