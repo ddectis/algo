@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../style/style.css?3" />
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Linear Search</title>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="title">
+            <h2>A JavaScript Implementation of the Linear Search Algorithm</h2>
+            
+        </div>
+    
+        <div>
+            <div class="text-inputs">
+                <div class="input-block">
+                    <label for="numbers-input">Provide a list of values separated by a comma and a space to search through:</label>
+                    <br/>
+                    <textarea type="text" id="numbers-input" name="numbers-input" placeholder="cherry, banana, apple, banana, cranberry, orange"></textarea>
+                </div>
+                <div class="input-block">
+                    <label for="text-search-input">Text to search for:</label>
+                    <input type="text" id="text-search-input" name="text-search-input" placeholder="banana">
+                </div>
+                <button id="execute-button">Execute</button>
+                <br/>
+                <smaller>An example number list has been provided</smaller>
+            </div>
+            <div class="results-container" id="results">
+                
+            </div>
+        </div>
+            <a class="go-back-link" href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+
+<div class="code-block">
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: rgb(51, 51, 51); color: rgb(255, 255, 255);"><span class="hljs-comment" style="color: rgb(136, 136, 136);">//create references to the pieces on the page that we'll need in order to grab the number list input and then put the result back on the page</span>
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> resultsContainer = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'results'</span>)
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> executeButton = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'execute-button'</span>);
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> numberInput = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'numbers-input'</span>)
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> textSearchKey = <span class="hljs-built_in" style="color: rgb(255, 255, 170);">document</span>.getElementById(<span class="hljs-string" style="color: rgb(162, 252, 162);">'text-search-input'</span>)
+
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> linearSearch = (searchList, targetValue) =&gt;{
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> matches = []
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> resultText = <span class="hljs-string" style="color: rgb(162, 252, 162);">''</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">for</span> (<span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> i = <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>; i &lt; searchList.length; i++){
+        <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(searchList[i])
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (searchList[i] === targetValue){
+            matches.push(i)
+        }
+    }
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (matches.length != <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>){
+        matches.forEach(match =&gt; {
+            resultText += targetValue + <span class="hljs-string" style="color: rgb(162, 252, 162);">" found at index "</span> + match + <span class="hljs-string" style="color: rgb(162, 252, 162);">". "</span>
+        });
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">return</span> resultText
+    } <span class="hljs-keyword" style="color: rgb(252, 194, 140);">else</span> {
+        resultText = targetValue + <span class="hljs-string" style="color: rgb(162, 252, 162);">" not found within list."</span>
+        <span class="hljs-keyword" style="color: rgb(252, 194, 140);">return</span> resultText
+    }
+}
+
+
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> clearResults = () =&gt;{
+    resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">''</span>
+}
+
+<span class="hljs-keyword" style="color: rgb(252, 194, 140);">const</span> printResult = results =&gt;{
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (results.length &gt; <span class="hljs-number" style="color: rgb(211, 99, 99);">0</span>){
+        resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">"Sorted List: "</span> + results
+    } <span class="hljs-keyword" style="color: rgb(252, 194, 140);">else</span> {
+        resultsContainer.innerText = <span class="hljs-string" style="color: rgb(162, 252, 162);">"No numbers were detected. Did you enter a comma separated list of numbers?"</span>
+    }
+}
+
+executeButton.addEventListener(<span class="hljs-string" style="color: rgb(162, 252, 162);">"click"</span>,<span class="hljs-function"><span class="hljs-keyword" style="color: rgb(252, 194, 140);">function</span>(<span class="hljs-params"></span>)</span>{
+    clearResults();
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> inputValue = numberInput.value;     <span class="hljs-comment" style="color: rgb(136, 136, 136);">//grab the value input in the text box provided</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!inputValue){                       <span class="hljs-comment" style="color: rgb(136, 136, 136);">// check to see if a value was indeed entered, if not, use the placeholder</span>
+        inputValue = <span class="hljs-string" style="color: rgb(162, 252, 162);">'cherry, banana, apple, banana, cranberry, orange'</span>
+    }
+    <span class="hljs-comment" style="color: rgb(136, 136, 136);">//map the comma separated list provided into an array</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> searchArray = inputValue.split(<span class="hljs-string" style="color: rgb(162, 252, 162);">', '</span>)
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(searchArray)
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> searchKey = textSearchKey.value; <span class="hljs-comment" style="color: rgb(136, 136, 136);">//grab the search key</span>
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">if</span> (!searchKey){ <span class="hljs-comment" style="color: rgb(136, 136, 136);">//and map the placeholder value if nothing has been entered</span>
+        searchKey = <span class="hljs-string" style="color: rgb(162, 252, 162);">'banana'</span>
+    }
+    <span class="hljs-keyword" style="color: rgb(252, 194, 140);">let</span> results = linearSearch(searchArray, searchKey)
+    printResult(results) <span class="hljs-comment" style="color: rgb(136, 136, 136);">// print them</span>
+    <span class="hljs-built_in" style="color: rgb(255, 255, 170);">console</span>.log(results) <span class="hljs-comment" style="color: rgb(136, 136, 136);">// I decided to leave all of the console logs in this script as it helped me understaned the flow of this algorithm</span>
+})
+</pre>
+</div>
+        
+            <div class="algo-description">
+                <h2>Linear Search Overview</h2>
+                <ul>
+                    <li>Quite simply, Linear Search iterates over each item in an array to check for a match</li>
+                    <li>Linear Search is a brute force algorithm</li>
+                </ul>
+            </div>
+
+            <a class="go-back-link" href="../../index.html"><< Go Back To Algorithm Sandbox</a>
+        </div>
+    </div>
+    
+
+    <script type="module" src="../scripts/linearSearch.js"></script>
+</body>
+</html>

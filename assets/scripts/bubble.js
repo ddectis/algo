@@ -3,7 +3,9 @@ const numberInput = document.getElementById('numbers-input')
 const executeButton = document.getElementById('execute-button')
 const resultsContainer = document.getElementById('results')
 
-//USAGE: you'll need both bubbleSort() and swap() in order for this algorithm to work. If you have both in your script, simply call bubbleSort() and pass it an array. It will return a sorted array.
+//USAGE: you'll need both bubbleSort() and swap() in order for this algorithm 
+//to work. If you have both in your script, simply call bubbleSort() and pass it 
+//an array. It will return a sorted array.
 
 //function to handle the swapping of values from index1 to index2
 const swap = (arr, index1, index2) => {
