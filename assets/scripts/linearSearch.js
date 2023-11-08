@@ -5,15 +5,15 @@ const numberInput = document.getElementById('numbers-input')
 const textSearchKey = document.getElementById('text-search-input')
 
 const linearSearch = (searchList, targetValue) =>{
-    let matches = []
-    let resultText = ''
-    for (let i = 0; i < searchList.length; i++){
+    let matches = [] // an array to store matches
+    let resultText = '' 
+    for (let i = 0; i < searchList.length; i++){ //iterate through each value in the list
         console.log(searchList[i])
-        if (searchList[i] === targetValue){
-            matches.push(i)
+        if (searchList[i] === targetValue){ //check for a match
+            matches.push(i) //record the match
         }
     }
-    if (matches.length != 0){
+    if (matches.length != 0){ //after checking 
         matches.forEach(match => {
             resultText += targetValue + " found at index " + match + ". "
         });
@@ -23,7 +23,6 @@ const linearSearch = (searchList, targetValue) =>{
         return resultText
     }
 }
-
 
 const clearResults = () =>{
     resultsContainer.innerText = ''
